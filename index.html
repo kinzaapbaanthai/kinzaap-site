@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kin Zaap Baan Thai — Thaise producten online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --panel:#FFFFFF; --ink:#1F2421; --soft:#5E655F; --line:#E7E9E6;
+  --brand:#2F5D46; --brand-dark:#234636; --brand-tint:#E6EFE9;
+  --accent:#C8412B; --gold:#E3A63A; --ok:#2E8A4F; --tile:#F5F7F4; --th-red:#A51931; --th-blue:#2D2A4A;
+  --radius:8px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161917; --panel:#1F2320; --ink:#EDEFEA; --soft:#A7ADA6; --line:#343A35;
+    --brand-tint:#233129; --tile:#2A2E2A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161917; --panel:#1F2320; --ink:#EDEFEA; --soft:#A7ADA6; --line:#343A35;
+  --brand-tint:#233129; --tile:#2A2E2A;
+}
+:root{box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans',system-ui,-apple-system,Segoe UI,sans-serif; font-size:15px; -webkit-font-smoothing:antialiased;}
+button,input,select{font-family:inherit; font-size:inherit; color:inherit;}
+a{color:inherit;}
+.wrap{max-width:1240px; margin:0 auto; padding:0 20px;}
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+
+/* Thai flag touches */
+.flagline{height:9px; background:linear-gradient(var(--th-red) 0 16.66%, #fff 16.66% 33.33%, var(--th-blue) 33.33% 66.66%, #fff 66.66% 83.33%, var(--th-red) 83.33%);}
+.logo-row{display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;}
+.flag{width:38px; height:25px; border-radius:3px; box-shadow:0 0 0 1px rgba(0,0,0,.08); flex-shrink:0; display:block;}
+.usp .flag{width:18px; height:12px; display:inline-block; vertical-align:-1px; margin-right:6px; box-shadow:none;}
+.sawasdee{background:var(--tile); border:1px solid var(--line); border-radius:var(--radius); padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; gap:12px; font-size:14px;}
+.sawasdee b{font-family:'Fraunces',Georgia,serif; font-size:17px; color:var(--th-red);}
+/* opening soon */
+.soon{background:var(--gold); color:#2a1e05; text-align:center; font-size:14px; padding:9px 14px; font-weight:500;}
+.soon a{font-weight:700;}
+.signup{background:var(--th-blue); color:#fff; border-radius:var(--radius); padding:24px 26px; margin-bottom:18px; display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:center; position:relative; overflow:hidden;}
+.signup::after{content:""; position:absolute; right:0; top:0; bottom:0; width:10px; background:linear-gradient(var(--th-red) 0 16.66%, #fff 16.66% 33.33%, var(--th-blue) 33.33% 66.66%, #fff 66.66% 83.33%, var(--th-red) 83.33%);}
+.signup h2{font-family:'Fraunces',Georgia,serif; font-size:24px; margin:0 0 6px; line-height:1.2;}
+.signup p{margin:0; color:#D8D7E6; font-size:14.5px; line-height:1.5;}
+.sform{display:flex; flex-direction:column; gap:10px; padding-right:12px;}
+.sform .row{display:flex; gap:8px;}
+.sform input[type=email]{flex:1; min-width:0; border:none; border-radius:6px; padding:12px 13px; font-size:15px; color:#1F2421; background:#fff;}
+.sform button{background:var(--accent); color:#fff; border:none; border-radius:6px; padding:0 18px; font-weight:700; cursor:pointer; white-space:nowrap;}
+.sform button:hover{background:#A9331F;}
+.sform label{display:flex; gap:8px; align-items:flex-start; font-size:12.5px; color:#D8D7E6; line-height:1.45; cursor:pointer;}
+.sform label input{margin-top:2px; accent-color:var(--gold);}
+.sform .msg{font-size:13.5px; font-weight:600; min-height:1em;}
+.sform .msg.ok{color:#9FE3B4;} .sform .msg.err{color:#FFC2B8;}
+.add.soonbtn{background:var(--panel); color:var(--brand); border:1.5px solid var(--brand);}
+.add.soonbtn:hover{background:var(--brand-tint);}
+.notice{font-size:12.5px; color:var(--soft);}
+@media (max-width:760px){.signup{grid-template-columns:1fr; padding:20px;} .sform .row{flex-direction:column;} .sform button{padding:12px;}}
+/* top USP bar */
+.usp{background:var(--th-blue); color:#E4E3EE; font-size:13px;}
+.usp .wrap{display:flex; gap:28px; justify-content:center; padding-top:8px; padding-bottom:8px; flex-wrap:wrap;}
+.usp span::before{content:"✓"; color:#F2B8C0; margin-right:6px; font-weight:700;}
+.demo{background:var(--gold); color:#2a1e05; text-align:center; font-size:12.5px; padding:5px 12px; font-weight:500;}
+
+/* header */
+header.main{background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:30;}
+header.main .wrap{display:flex; align-items:center; gap:24px; padding-top:14px; padding-bottom:14px;}
+.logo{display:flex; flex-direction:column; line-height:1.05; text-decoration:none; flex-shrink:0;}
+.logo b{font-family:'Fraunces',Georgia,serif; font-size:22px; color:var(--brand);}
+.logo small{font-size:12px; color:var(--accent); margin-top:2px;}
+.search{flex:1; display:flex; max-width:560px;}
+.search input{flex:1; border:1.5px solid var(--line); border-right:none; background:var(--tile); padding:11px 14px; border-radius:var(--radius) 0 0 var(--radius); min-width:0;}
+.search input:focus{outline:none; border-color:var(--brand);}
+.search button{background:var(--brand); color:#fff; border:none; padding:0 18px; border-radius:0 var(--radius) var(--radius) 0; cursor:pointer; font-weight:600;}
+.head-actions{display:flex; gap:10px; margin-left:auto; align-items:center;}
+.head-link{font-size:13.5px; color:var(--soft); text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:2px;}
+.cart-btn{background:var(--accent); color:#fff; border:none; border-radius:var(--radius); padding:10px 16px; cursor:pointer; font-weight:600; display:flex; gap:8px; align-items:center;}
+.cart-btn .n{background:#fff; color:var(--accent); border-radius:999px; min-width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; font-size:12.5px; padding:0 6px;}
+.cart-btn .amt{font-weight:500; opacity:.9;}
+
+/* horizontal category nav */
+.catnav{background:var(--panel); border-bottom:1px solid var(--line);}
+.catnav .wrap{display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;}
+.catnav .wrap::-webkit-scrollbar{display:none;}
+.catnav button{background:none; border:none; padding:12px 14px; cursor:pointer; white-space:nowrap; font-weight:500; color:var(--soft); border-bottom:2.5px solid transparent;}
+.catnav button.on,.catnav button:hover{color:var(--brand); border-bottom-color:var(--brand);}
+
+/* layout */
+.layout{display:grid; grid-template-columns:250px 1fr; gap:24px; padding-top:22px; padding-bottom:48px;}
+aside.side{align-self:start; position:sticky; top:84px;}
+.box{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); margin-bottom:16px; overflow:hidden;}
+.box h3{font-size:14.5px; font-weight:700; margin:0; padding:13px 16px; border-bottom:1px solid var(--line); background:var(--panel); color:var(--ink); display:flex; align-items:center; gap:8px;}
+.box h3::before{content:""; width:4px; height:16px; border-radius:2px; background:linear-gradient(var(--th-red) 0 33%, var(--th-blue) 33% 67%, var(--th-red) 67%);}
+.cats{list-style:none; margin:0; padding:6px 0;}
+.cats button{width:100%; display:flex; justify-content:space-between; align-items:center; background:none; border:none; padding:9px 16px; cursor:pointer; text-align:left;}
+.cats button:hover{background:var(--tile);}
+.cats button.on{color:var(--brand); font-weight:700; background:var(--brand-tint); box-shadow:inset 3px 0 0 var(--brand);}
+.cats .count{font-size:12.5px; color:var(--soft); background:var(--tile); border-radius:999px; padding:1px 8px;}
+.filters{padding:12px 16px 16px;}
+.filters .grp{margin-bottom:14px;}
+.filters .grp:last-child{margin-bottom:0;}
+.filters .t{font-weight:600; font-size:13.5px; margin-bottom:8px;}
+.filters label{display:flex; gap:9px; align-items:center; padding:4px 0; cursor:pointer; font-size:14px;}
+.filters input[type=checkbox]{accent-color:var(--brand); width:16px; height:16px;}
+.price-inputs{display:flex; gap:8px; align-items:center;}
+.price-inputs input{width:100%; border:1px solid var(--line); background:var(--bg); border-radius:6px; padding:7px 9px;}
+.help{padding:14px 16px; font-size:13.5px; color:var(--soft); line-height:1.55;}
+.help b{color:var(--ink);}
+
+/* main area */
+.crumbs{font-size:13px; color:var(--soft); margin-bottom:8px;}
+.crumbs a{text-decoration:none;} .crumbs a:hover{text-decoration:underline;}
+.titlebar{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+.titlebar h1{font-family:'Fraunces',Georgia,serif; font-size:28px; margin:0; line-height:1.15;}
+.titlebar p{margin:4px 0 0; color:var(--soft); font-size:14px;}
+.tools{display:flex; gap:10px; align-items:center;}
+.tools select{border:1px solid var(--line); background:var(--panel); border-radius:6px; padding:8px 10px;}
+.filter-toggle{display:none; border:1px solid var(--line); background:var(--panel); border-radius:6px; padding:8px 12px; cursor:pointer; font-weight:600;}
+
+.promo{background:var(--brand); color:#fff; border-radius:var(--radius); padding:18px 22px; display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:18px; flex-wrap:wrap;}
+.promo b{font-family:'Fraunces',Georgia,serif; font-size:20px; display:block;}
+.promo span{opacity:.85; font-size:14px;}
+.promo .code{background:var(--gold); color:#2a1e05; font-weight:700; padding:7px 14px; border-radius:6px; font-size:14px;}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:14px;}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); display:flex; flex-direction:column; overflow:hidden; transition:border-color .15s, box-shadow .15s;}
+.card:hover{border-color:#CDD3CD; box-shadow:0 4px 14px rgba(30,40,32,.08);}
+.thumb{background:var(--tile); aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; cursor:pointer; border:none; width:100%; padding:0;}
+.thumb svg{width:52%; height:52%;}
+.tag{position:absolute; top:10px; left:10px; font-size:11.5px; font-weight:700; padding:3px 8px; border-radius:4px; color:#fff;}
+.tag.new{background:var(--brand);} .tag.hot{background:var(--accent);} .tag.veg{background:var(--ok);}
+.info{padding:12px 14px 14px; display:flex; flex-direction:column; gap:5px; flex:1;}
+.brand{font-size:12px; color:var(--soft); text-transform:none;}
+.name{font-weight:600; font-size:15px; line-height:1.3; background:none; border:none; padding:0; text-align:left; cursor:pointer;}
+.name:hover{color:var(--brand); text-decoration:underline;}
+.size{font-size:13px; color:var(--soft);}
+.stars{font-size:12.5px; color:var(--gold); letter-spacing:1px;}
+.stars span{color:var(--soft); letter-spacing:0; margin-left:4px;}
+.stock{font-size:12.5px; font-weight:600;}
+.stock.ok{color:var(--ok);} .stock.low{color:#B8791A;} .stock.out{color:var(--accent);}
+.buy{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px; gap:8px;}
+.price{font-size:19px; font-weight:700;}
+.price small{display:block; font-size:11.5px; font-weight:400; color:var(--soft);}
+.add{background:var(--brand); color:#fff; border:none; border-radius:6px; padding:9px 12px; cursor:pointer; font-weight:600; font-size:13.5px; white-space:nowrap;}
+.add:hover{background:var(--brand-dark);}
+.add:disabled{background:var(--line); color:var(--soft); cursor:not-allowed;}
+.add.done{background:var(--ok);}
+.empty{grid-column:1/-1; background:var(--panel); border:1px dashed var(--line); border-radius:var(--radius); padding:40px; text-align:center; color:var(--soft);}
+.empty button{margin-top:12px; background:var(--brand); color:#fff; border:none; border-radius:6px; padding:9px 16px; cursor:pointer; font-weight:600;}
+
+/* footer */
+footer{background:var(--brand-dark); color:#C9D6CE; padding:40px 0 24px; font-size:14px;}
+footer .cols{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+footer h4{color:#fff; margin:0 0 10px; font-size:15px;}
+footer p{margin:0; line-height:1.8;}
+footer a{text-decoration:none;} footer a:hover{text-decoration:underline;}
+footer .fine{border-top:1px solid rgba(255,255,255,.12); margin-top:28px; padding-top:16px; font-size:12.5px; color:#93A69A;}
+
+/* drawers & modal */
+.scrim{position:fixed; inset:0; background:rgba(15,20,17,.45); opacity:0; pointer-events:none; transition:opacity .2s; z-index:50;}
+.scrim.on{opacity:1; pointer-events:auto;}
+.drawer{position:fixed; top:0; right:0; height:100%; width:min(400px,94vw); background:var(--panel); z-index:60; transform:translateX(100%); transition:transform .25s ease; display:flex; flex-direction:column; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+.drawer.on{transform:none;}
+.drawer.left{left:0; right:auto; transform:translateX(-100%); width:min(320px,88vw); overflow-y:auto; background:var(--bg); padding:16px;}
+.drawer.left.on{transform:none;}
+.dh{display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--line);}
+.dh h3{margin:0; font-size:18px;}
+.x{background:none; border:none; font-size:26px; line-height:1; cursor:pointer; color:var(--soft);}
+.db{flex:1; overflow-y:auto; padding:8px 20px;}
+.line{display:grid; grid-template-columns:1fr auto; gap:6px; padding:12px 0; border-bottom:1px solid var(--line);}
+.line .ln{font-weight:600; font-size:14px;}
+.qty{display:flex; align-items:center; gap:0; border:1px solid var(--line); border-radius:6px; width:fit-content; margin-top:6px;}
+.qty button{background:none; border:none; width:30px; height:28px; cursor:pointer; font-size:16px;}
+.qty span{min-width:26px; text-align:center; font-size:14px;}
+.line .lp{font-weight:700; text-align:right;}
+.line .rm{background:none; border:none; color:var(--accent); font-size:12.5px; cursor:pointer; padding:0; margin-top:6px;}
+.df{border-top:1px solid var(--line); padding:14px 20px 18px; display:flex; flex-direction:column; gap:10px;}
+.seg{display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+.seg button{background:var(--panel); border:none; padding:9px; cursor:pointer; font-weight:600; font-size:13.5px;}
+.seg button.on{background:var(--brand); color:#fff;}
+.df input{border:1px solid var(--line); background:var(--bg); border-radius:6px; padding:9px 11px; width:100%;}
+.sum{display:flex; justify-content:space-between; font-size:14px;}
+.sum.total{font-size:17px; font-weight:700; border-top:1px solid var(--line); padding-top:8px;}
+.bar{height:6px; background:var(--line); border-radius:3px; overflow:hidden;}
+.bar i{display:block; height:100%; background:var(--ok); transition:width .3s;}
+.ship-note{font-size:12.5px; color:var(--soft);}
+.wa{background:#25A35A; color:#fff; text-align:center; text-decoration:none; border-radius:6px; padding:13px; font-weight:700;}
+.wa[aria-disabled="true"]{background:var(--line); color:var(--soft); pointer-events:none;}
+
+.modal{position:fixed; inset:0; z-index:70; display:none; align-items:center; justify-content:center; padding:20px;}
+.modal.on{display:flex;}
+.mcard{background:var(--panel); border-radius:10px; max-width:760px; width:100%; max-height:90%; overflow-y:auto; display:grid; grid-template-columns:1fr 1.1fr; position:relative;}
+.mcard .thumb{aspect-ratio:auto; min-height:300px; cursor:default;}
+.mbody{padding:24px; display:flex; flex-direction:column; gap:10px;}
+.mbody h2{font-family:'Fraunces',Georgia,serif; margin:0; font-size:24px; line-height:1.2;}
+.mbody p{margin:0; color:var(--soft); line-height:1.55; font-size:14.5px;}
+.spec{border-top:1px solid var(--line); padding-top:10px; font-size:13.5px; line-height:1.55;}
+.spec b{display:block; font-size:13px; margin-bottom:2px;}
+.spec .al{font-weight:700; color:var(--accent);}
+.mcard .x{position:absolute; top:10px; right:14px;}
+.toast{position:fixed; bottom:calc(20px + env(safe-area-inset-bottom,0px)); left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); padding:11px 18px; border-radius:8px; font-size:14px; opacity:0; transition:all .2s; z-index:80; pointer-events:none;}
+.toast.on{opacity:1; transform:translateX(-50%) translateY(0);}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;}
+  aside.side{display:none;}
+  .filter-toggle{display:inline-block;}
+  footer .cols{grid-template-columns:1fr 1fr;}
+  .head-link{display:none;}
+}
+@media (max-width:640px){
+  header.main .wrap{flex-wrap:wrap; gap:12px;}
+  .search{order:3; max-width:none; flex-basis:100%;}
+  .cart-btn .amt{display:none;}
+  .grid{grid-template-columns:repeat(2,1fr); gap:10px;}
+  .info{padding:10px;}
+  .buy{flex-direction:column; align-items:stretch;}
+  .add{width:100%;}
+  .mcard{grid-template-columns:1fr;}
+  .mcard .thumb{min-height:200px;}
+  .usp .wrap{gap:14px; font-size:12px;}
+  .usp span:nth-child(n+3){display:none;}
+  footer .cols{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="flagline" aria-hidden="true"></div>
+<div class="soon">🇹🇭 <b>Binnenkort open!</b> We nemen nog geen bestellingen aan. <a href="#signup" data-go-signup>Meld je aan</a> en hoor als eerste wanneer de shop opengaat.</div>
+<div class="usp"><div class="wrap">
+  <span>Opening binnenkort</span>
+  <span>Ingekocht bij erkende Nederlandse groothandels</span>
+  <span>Straks ook gratis ophalen in Losser</span>
+  <span>Ingrediënten &amp; allergenen bij elk product</span>
+</div></div>
+
+<header class="main"><div class="wrap">
+  <a class="logo-row" href="#" onclick="setCat('all');return false;"><svg class="flag" viewBox="0 0 9 6" aria-label="Thaise vlag"><rect width="9" height="6" fill="#A51931"/><rect y="1" width="9" height="4" fill="#F4F5F8"/><rect y="2" width="9" height="2" fill="#2D2A4A"/></svg><span class="logo"><b>Kin Zaap Baan Thai</b><small>กินแซ่บบ้านไทย · Thaise keuken aan huis</small></span></a>
+  <form class="search" onsubmit="event.preventDefault();">
+    <input id="q" type="search" placeholder="Zoek op product, bijv. curry, noedels, vissaus…" aria-label="Zoeken">
+    <button type="submit">Zoeken</button>
+  </form>
+  <div class="head-actions">
+    <a class="head-link" href="#info">Klantenservice</a>
+    <a class="cart-btn" href="#signup" data-go-signup style="text-decoration:none">🔔 Houd me op de hoogte</a>
+  </div>
+</div></header>
+
+<nav class="catnav"><div class="wrap" id="topcats"></div></nav>
+
+<div class="wrap layout">
+  <aside class="side" id="sidebar"></aside>
+
+  <main>
+    <div class="crumbs" id="crumbs"></div>
+    <div class="titlebar">
+      <div><h1 id="title">Alle producten</h1><p id="subtitle"></p></div>
+      <div class="tools">
+        <button class="filter-toggle" id="openFilters">Categorieën &amp; filters</button>
+        <select id="sort" aria-label="Sorteren">
+          <option value="pop">Aanbevolen</option>
+          <option value="low">Prijs laag – hoog</option>
+          <option value="high">Prijs hoog – laag</option>
+          <option value="az">Naam A – Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="sawasdee" id="hello"><svg class="flag" style="width:30px;height:20px" viewBox="0 0 9 6" aria-label="Thaise vlag"><rect width="9" height="6" fill="#A51931"/><rect y="1" width="9" height="4" fill="#F4F5F8"/><rect y="2" width="9" height="2" fill="#2D2A4A"/></svg><div><b>สวัสดีค่ะ · Sawasdee kha!</b><br><span style="color:var(--soft)">Thaise producten zoals ze bij ons thuis in de keuken staan, ingekocht bij erkende Nederlandse groothandels.</span></div></div>
+    <div class="signup" id="signup">
+      <div><h2>We gaan binnenkort open</h2><p>Laat je e-mailadres achter en je krijgt één bericht zodra je kunt bestellen. Geen spam, alleen nieuws van de shop.</p></div>
+      <form class="sform" id="sform" novalidate>
+        <div class="row"><input type="email" id="semail" placeholder="jouw@email.nl" autocomplete="email" aria-label="E-mailadres" required><button type="submit">Aanmelden</button></div>
+        <label><input type="checkbox" id="sok"> Ja, Kin Zaap Baan Thai mag mij mailen over de opening en aanbiedingen. Afmelden kan altijd. Zie de privacyverklaring.</label>
+        <div class="msg" id="smsg" role="status"></div>
+      </form>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<div class="flagline" aria-hidden="true"></div>
+<footer id="info"><div class="wrap">
+  <div class="cols">
+    <div><h4>Kin Zaap Baan Thai</h4><p>Het Egbertink 132<br>7582 DH Losser<br>BTW: NL001797931801<br>KvK: (in te vullen)<br><a href="mailto:kinzaapbaanthai@gmail.com">kinzaapbaanthai@gmail.com</a></p></div>
+    <div><h4>Klantenservice</h4><p><a href="#">Bestellen &amp; betalen</a><br><a href="#">Verzenden &amp; ophalen</a><br><a href="#">Retourneren (14 dagen)</a><br><a href="#">Contact via WhatsApp</a></p></div>
+    <div><h4>Over ons</h4><p><a href="#">Ons verhaal</a><br><a href="#">Onze leveranciers</a><br><a href="#">Facebook</a></p></div>
+    <div><h4>Juridisch</h4><p><a href="#">Algemene voorwaarden</a><br><a href="#">Privacyverklaring</a><br><a href="#">Allergeneninformatie</a></p></div>
+  </div>
+  <div class="fine">© 2026 Kin Zaap Baan Thai · Binnenkort open · Assortiment en prijzen onder voorbehoud, incl. 9% btw</div>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="drawer left" id="filterDrawer" aria-label="Filters">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><b style="font-size:17px;">Categorieën &amp; filters</b><button class="x" data-close>&times;</button></div>
+  <div id="sidebarMobile"></div>
+</div>
+
+
+<div class="modal" id="modal"><div class="mcard" id="mcard"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+var WA="31612345678", SHIP=4.95, FREE=35;
+var CATS=[
+ {id:"curry",n:"Currypasta's"},{id:"saus",n:"Sauzen & dressings"},{id:"noedel",n:"Noedels & rijst"},
+ {id:"kokos",n:"Kokos"},{id:"kruid",n:"Kruiden & specerijen"},{id:"snack",n:"Snacks & zoet"},{id:"drank",n:"Dranken"}
+];
+// shape: jar | bottle | pouch | can | leaf | box | bag
+var P=[
+ {id:1,c:"curry",n:"Groene currypasta",b:"Mae Ploy",s:"400 g",p:3.95,st:24,r:5,rc:18,sh:"jar",col:"#4E8A45",tag:"hot",d:"Frisse, pittige pasta met groene chili, citroengras en galangal. Basis voor gaeng kiew waan.",i:"groene chili, knoflook, citroengras, sjalot, zout, galangal, garnalenpasta (garnalen), kaffir limoenschil, koriander, komijn",a:"schaaldieren"},
+ {id:2,c:"curry",n:"Rode currypasta",b:"Mae Ploy",s:"400 g",p:3.95,st:30,r:5,rc:22,sh:"jar",col:"#C8412B",d:"Klassieke rode curry, voor rundvlees, kip of pompoen.",i:"gedroogde rode chili, knoflook, citroengras, sjalot, zout, galangal, garnalenpasta (garnalen), kaffir limoenschil",a:"schaaldieren"},
+ {id:3,c:"curry",n:"Massaman currypasta",b:"Maesri",s:"114 g",p:1.95,st:4,r:4,rc:9,sh:"can",col:"#B8791A",d:"Mild en rijk, met kaneel en kardemom. Heerlijk met aardappel en rundvlees.",i:"gedroogde chili, sjalot, knoflook, citroengras, zout, galangal, koriander, komijn, kaneel, kardemom, garnalenpasta (garnalen)",a:"schaaldieren"},
+ {id:4,c:"curry",n:"Panang currypasta",b:"Maesri",s:"114 g",p:1.95,st:12,r:4,rc:6,sh:"can",col:"#A8352A",d:"Dikke, licht zoete curry met een pinda-toon.",i:"gedroogde chili, knoflook, sjalot, citroengras, zout, galangal, koriander, pinda's, garnalenpasta (garnalen)",a:"pinda, schaaldieren"},
+ {id:5,c:"saus",n:"Vissaus",b:"Squid Brand",s:"700 ml",p:3.25,st:40,r:5,rc:31,sh:"bottle",col:"#8C5A1E",d:"Onmisbaar in de Thaise keuken. Zout, umami, voor bijna elk gerecht.",i:"ansjovis (vis), zout, suiker",a:"vis"},
+ {id:6,c:"saus",n:"Oestersaus",b:"Mae Krua",s:"600 ml",p:4.45,st:18,r:5,rc:14,sh:"bottle",col:"#3E2A1C",d:"Dikke, zoet-zoute saus voor roerbakgerechten.",i:"oesterextract (weekdieren), suiker, zout, gemodificeerd zetmeel, water",a:"weekdieren"},
+ {id:7,c:"saus",n:"Sriracha chilisaus",b:"Shark",s:"435 ml",p:3.49,st:22,r:4,rc:11,sh:"bottle",col:"#D8452D",tag:"hot",d:"De originele Thaise sriracha: minder zoet, meer knoflook.",i:"chili, suiker, knoflook, azijn, zout",a:"geen"},
+ {id:8,c:"saus",n:"Zoete chilisaus voor kip",b:"Mae Ploy",s:"730 ml",p:3.75,st:0,r:5,rc:25,sh:"bottle",col:"#E06A3A",d:"Zoet en licht pittig, als dip of glaze.",i:"suiker, water, chili, knoflook, azijn, zout, verdikkingsmiddel",a:"geen"},
+ {id:9,c:"saus",n:"Lichte sojasaus",b:"Healthy Boy",s:"700 ml",p:3.15,st:15,r:4,rc:8,sh:"bottle",col:"#2E2319",d:"Thaise lichte sojasaus, zachter dan Chinese varianten.",i:"water, sojabonen, zout, suiker, tarwebloem",a:"soja, gluten (tarwe)"},
+ {id:10,c:"noedel",n:"Pad Thai rijstnoedels",b:"Erawan",s:"400 g",p:2.49,st:35,r:5,rc:19,sh:"pouch",col:"#E3A63A",tag:"veg",d:"Platte rijstnoedels van 5 mm, speciaal voor pad thai.",i:"rijstmeel, water",a:"geen"},
+ {id:11,c:"noedel",n:"Jasmijnrijst",b:"Royal Umbrella",s:"4,5 kg",p:12.95,st:9,r:5,rc:27,sh:"bag",col:"#D9C9A0",d:"Geurige Thaise hom mali rijst, oogst 2026.",i:"jasmijnrijst",a:"geen"},
+ {id:12,c:"noedel",n:"Kleefrijst",b:"Three Ladies",s:"1 kg",p:3.29,st:3,r:4,rc:7,sh:"bag",col:"#EDE6D3",d:"Voor khao niao en mango sticky rice.",i:"kleefrijst",a:"geen"},
+ {id:13,c:"noedel",n:"Mama instantnoedels Tom Yum",b:"Mama",s:"5 × 60 g",p:2.75,st:26,r:4,rc:12,sh:"box",col:"#E9C33F",tag:"new",d:"De bekendste instantnoedels van Thailand.",i:"tarwebloem, palmolie, zout, suiker, chili, citroengras, garnalenpoeder (garnalen), knoflook",a:"gluten (tarwe), schaaldieren, soja"},
+ {id:14,c:"kokos",n:"Kokosmelk",b:"Chaokoh",s:"400 ml",p:1.89,st:48,r:5,rc:33,sh:"can",col:"#F2F0E8",tag:"veg",d:"Romige kokosmelk, 19% vet. Basis voor elke curry.",i:"kokosextract, water",a:"geen"},
+ {id:15,c:"kokos",n:"Kokosroom",b:"Aroy-D",s:"400 ml",p:2.29,st:20,r:5,rc:10,sh:"can",col:"#EFEAD8",tag:"veg",d:"Extra romig, voor desserts en tom kha.",i:"kokosextract",a:"geen"},
+ {id:16,c:"kruid",n:"Kaffir limoenblaadjes (gedroogd)",b:"Nguan Soon",s:"15 g",p:2.25,st:11,r:4,rc:5,sh:"leaf",col:"#5B7A3A",tag:"veg",d:"Voor tom yum, curry's en roerbak.",i:"kaffir limoenblad",a:"geen"},
+ {id:17,c:"kruid",n:"Gedroogde chilivlokken",b:"Por Kwan",s:"100 g",p:2.49,st:14,r:5,rc:6,sh:"pouch",col:"#B8352A",tag:"hot",d:"Grof gemalen, geroosterde chili.",i:"chili",a:"geen"},
+ {id:18,c:"kruid",n:"Palmsuiker",b:"Cock Brand",s:"454 g",p:2.95,st:0,r:4,rc:4,sh:"jar",col:"#9C6A2E",d:"Karamelachtige zoetheid voor pad thai en curry's.",i:"palmsuiker, rietsuiker",a:"geen"},
+ {id:19,c:"snack",n:"Garnalenkroepoek",b:"Hanuman",s:"200 g",p:2.19,st:17,r:4,rc:8,sh:"bag",col:"#F0C9B0",d:"Ongebakken kroepoek, zelf frituren.",i:"tapiocazetmeel, garnalen (18%), suiker, zout",a:"schaaldieren"},
+ {id:20,c:"snack",n:"Gedroogde mango",b:"Kin Zaap selectie",s:"250 g",p:4.95,st:7,r:5,rc:13,sh:"pouch",col:"#F0A93A",tag:"new",d:"Zachte, zoete mango uit Chiang Mai.",i:"mango, suiker",a:"geen"},
+ {id:21,c:"drank",n:"Thaise ijsthee-mix",b:"Number One",s:"400 g",p:5.95,st:10,r:5,rc:16,sh:"bag",col:"#D46A2E",d:"Voor cha yen, de oranje Thaise ijsthee.",i:"zwarte thee, kleurstof (E110), aroma",a:"geen"},
+ {id:22,c:"drank",n:"Kokoswater",b:"Foco",s:"520 ml",p:2.39,st:0,r:4,rc:9,sh:"can",col:"#8FB86A",tag:"veg",d:"100% kokoswater, zonder toegevoegde suiker.",i:"kokoswater",a:"geen"}
+];
+
+var S={cat:"all",q:"",sort:"pop",stock:false,veg:false,noAll:false,noFish:false,min:"",max:""};
+var cart={}, mode="del";
+try{cart=JSON.parse(localStorage.getItem("kzbt_cart")||"{}")||{};}catch(e){cart={};}
+function save(){try{localStorage.setItem("kzbt_cart",JSON.stringify(cart));}catch(e){}}
+function eur(n){return "€"+n.toFixed(2).replace(".",",");}
+function $(id){return document.getElementById(id);}
+function byId(id){return P.find(function(x){return x.id==id;});}
+
+function shape(sh,col){
+ var s={
+  jar:'<rect x="30" y="14" width="40" height="12" rx="2" fill="#333" opacity=".75"/><path d="M22 28h56v52a10 10 0 0 1-10 10H32a10 10 0 0 1-10-10z" fill="C"/><rect x="22" y="46" width="56" height="18" fill="#fff" opacity=".85"/>',
+  bottle:'<path d="M43 6h14v16l8 10v54a8 8 0 0 1-8 8H43a8 8 0 0 1-8-8V32l8-10z" fill="C"/><rect x="35" y="48" width="30" height="22" fill="#fff" opacity=".85"/><rect x="43" y="4" width="14" height="6" fill="#333" opacity=".7"/>',
+  pouch:'<path d="M20 14q30-8 60 0v62q0 14-30 16-30-2-30-16z" fill="C"/><rect x="30" y="40" width="40" height="22" rx="3" fill="#fff" opacity=".85"/>',
+  can:'<rect x="24" y="18" width="52" height="68" rx="6" fill="C"/><ellipse cx="50" cy="18" rx="26" ry="5" fill="#aaa"/><rect x="24" y="40" width="52" height="24" fill="#fff" opacity=".8"/><path d="M24 40h52v24H24z" fill="none" stroke="C" stroke-width="2"/>',
+  leaf:'<path d="M18 84Q18 18 84 16Q84 82 18 84Z" fill="C"/><path d="M22 80L78 22" stroke="#fff" stroke-width="2" opacity=".5"/>',
+  box:'<rect x="16" y="26" width="68" height="52" rx="3" fill="C"/><rect x="26" y="38" width="48" height="26" fill="#fff" opacity=".85"/>',
+  bag:'<path d="M26 12h48l6 18v54a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6V30z" fill="C"/><rect x="30" y="40" width="40" height="26" rx="2" fill="#fff" opacity=".8"/><rect x="26" y="12" width="48" height="6" fill="#000" opacity=".15"/>'
+ }[sh];
+ return '<svg viewBox="0 0 100 100" aria-hidden="true">'+s.replace(/C/g,col)+'</svg>';
+}
+function stars(r,rc){return '<div class="stars">'+"★★★★★".slice(0,r)+'<span style="color:var(--line);letter-spacing:1px;margin:0">'+"★★★★★".slice(r)+'</span><span>('+rc+')</span></div>';}
+function stock(st){return st===0?'<div class="stock out">Tijdelijk uitverkocht</div>':st<=5?'<div class="stock low">Nog '+st+' op voorraad</div>':'<div class="stock ok">Op voorraad, morgen in huis</div>';}
+function tag(t){return t?'<span class="tag '+t+'">'+({new:"Nieuw",hot:"Pittig",veg:"Vegan"})[t]+'</span>':'';}
+
+function filtered(){
+ var q=S.q.trim().toLowerCase();
+ var r=P.filter(function(p){
+  if(S.cat!=="all"&&p.c!==S.cat)return false;
+  if(q&&(p.n+" "+p.b+" "+p.d).toLowerCase().indexOf(q)<0)return false;
+  if(S.stock&&p.st===0)return false;
+  if(S.veg&&p.tag!=="veg")return false;
+  if(S.noAll&&p.a!=="geen")return false;
+  if(S.noFish&&/vis|schaal|weekd/.test(p.a))return false;
+  if(S.min!==""&&p.p<+S.min)return false;
+  if(S.max!==""&&p.p>+S.max)return false;
+  return true;});
+ var f={pop:function(a,b){return b.rc-a.rc;},low:function(a,b){return a.p-b.p;},high:function(a,b){return b.p-a.p;},az:function(a,b){return a.n.localeCompare(b.n);}}[S.sort];
+ return r.sort(f);
+}
+
+function sidebarHTML(){
+ var h='<div class="box"><h3>Categorieën</h3><ul class="cats">';
+ h+='<li><button data-cat="all" class="'+(S.cat==="all"?"on":"")+'">Alle producten <span class="count">'+P.length+'</span></button></li>';
+ CATS.forEach(function(c){var n=P.filter(function(p){return p.c===c.id;}).length;h+='<li><button data-cat="'+c.id+'" class="'+(S.cat===c.id?"on":"")+'">'+c.n+' <span class="count">'+n+'</span></button></li>';});
+ h+='</ul></div>';
+ h+='<div class="box"><h3>Filters</h3><div class="filters">'+
+    '<div class="grp"><div class="t">Dieet &amp; allergenen</div>'+
+   '<label><input type="checkbox" data-f="veg" '+(S.veg?"checked":"")+'> Vegan</label>'+
+   '<label><input type="checkbox" data-f="noFish" '+(S.noFish?"checked":"")+'> Zonder vis &amp; schaaldieren</label>'+
+   '<label><input type="checkbox" data-f="noAll" '+(S.noAll?"checked":"")+'> Zonder allergenen</label></div>'+
+  '<div class="grp"><div class="t">Prijs</div><div class="price-inputs"><input type="number" min="0" step="0.5" placeholder="Min" data-p="min" value="'+S.min+'"><span>–</span><input type="number" min="0" step="0.5" placeholder="Max" data-p="max" value="'+S.max+'"></div></div>'+
+ '</div></div>';
+ h+='<div class="box"><h3>Hulp nodig?</h3><div class="help">Stuur ons een <b>WhatsApp-bericht</b>, we antwoorden meestal binnen een uur. Vragen over allergenen? Die staan bij elk product.</div></div>';
+ return h;
+}
+function bindSidebar(root){
+ root.querySelectorAll("[data-cat]").forEach(function(b){b.onclick=function(){setCat(b.dataset.cat);closeAll();};});
+ root.querySelectorAll("[data-f]").forEach(function(c){c.onchange=function(){S[c.dataset.f]=c.checked;render();};});
+ root.querySelectorAll("[data-p]").forEach(function(i){i.oninput=function(){S[i.dataset.p]=i.value;renderGrid();};});
+}
+
+window.setCat=function(c){S.cat=c;render();window.scrollTo({top:0,behavior:"smooth"});};
+
+function render(){
+ $("sidebar").innerHTML=sidebarHTML(); bindSidebar($("sidebar"));
+ $("sidebarMobile").innerHTML=sidebarHTML(); bindSidebar($("sidebarMobile"));
+ var t='<button data-c="all" class="'+(S.cat==="all"?"on":"")+'">Alle producten</button>';
+ CATS.forEach(function(c){t+='<button data-c="'+c.id+'" class="'+(S.cat===c.id?"on":"")+'">'+c.n+'</button>';});
+ $("topcats").innerHTML=t;
+ $("topcats").querySelectorAll("button").forEach(function(b){b.onclick=function(){setCat(b.dataset.c);};});
+ var cn=S.cat==="all"?"Alle producten":CATS.find(function(c){return c.id===S.cat;}).n;
+ $("title").textContent=S.q?'Zoekresultaten voor "'+S.q+'"':cn;
+ $("crumbs").innerHTML='<a href="#" onclick="setCat(\'all\');return false;">Home</a> › '+(S.cat==="all"?"Producten":'<a href="#" onclick="setCat(\'all\');return false;">Producten</a> › '+cn);
+  $("hello").style.display=S.cat==="all"&&!S.q?"flex":"none";
+ renderGrid();
+}
+function renderGrid(){
+ var r=filtered();
+ $("subtitle").textContent=r.length+" "+(r.length===1?"product":"producten");
+ if(!r.length){$("grid").innerHTML='<div class="empty">Geen producten gevonden met deze filters.<br><button id="reset">Filters wissen</button></div>';
+  $("reset").onclick=function(){S={cat:"all",q:"",sort:S.sort,stock:false,veg:false,noAll:false,noFish:false,min:"",max:""};$("q").value="";render();};return;}
+ $("grid").innerHTML=r.map(function(p){
+  return '<div class="card"><button class="thumb" data-open="'+p.id+'" aria-label="Details '+p.n+'">'+tag(p.tag)+shape(p.sh,p.col)+'</button>'+
+  '<div class="info"><div class="brand">'+p.b+'</div><button class="name" data-open="'+p.id+'">'+p.n+'</button><div class="size">'+p.s+'</div>'+
+  '<div class="buy"><div class="price">'+eur(p.p)+'</div><button class="add soonbtn" data-go-signup>Binnenkort</button></div></div></div>';
+ }).join("");
+ $("grid").querySelectorAll("[data-go-signup]").forEach(function(b){b.onclick=goSignup;});
+ $("grid").querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){openProduct(+b.dataset.open);};});
+}
+
+function add(id,btn){
+ var p=byId(id); cart[id]=Math.min((cart[id]||0)+1,p.st); save(); renderCart();
+ toast(p.n+" toegevoegd aan je winkelwagen");
+ if(btn){btn.textContent="✓ Toegevoegd";btn.classList.add("done");setTimeout(function(){btn.textContent="Toevoegen";btn.classList.remove("done");},1100);}
+}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("on");},1800);}
+
+function openProduct(id){
+ var p=byId(id), cat=CATS.find(function(c){return c.id===p.c;}).n;
+ $("mcard").innerHTML='<div class="thumb" style="cursor:default">'+tag(p.tag)+shape(p.sh,p.col)+'</div>'+
+ '<div class="mbody"><button class="x" data-close aria-label="Sluiten">&times;</button><div class="brand">'+p.b+' · '+cat+'</div><h2>'+p.n+'</h2>'+
+ '<p>'+p.d+'</p><div class="price" style="font-size:24px">'+eur(p.p)+' <small style="display:inline">'+p.s+' · incl. btw</small></div>'+
+ '<div class="notice">Nog niet te bestellen. De shop gaat binnenkort open.</div><button class="add" style="padding:12px" id="madd">🔔 Laat me weten wanneer het kan</button>'+
+ '<div class="spec"><b>Ingrediënten</b>'+p.i+'</div>'+
+ '<div class="spec"><b>Allergenen</b>'+(p.a==="geen"?"Geen allergenen volgens etiket":'<span class="al">Bevat: '+p.a+'</span>')+'</div>'+
+ '<div class="spec"><b>Bewaren</b>Koel en droog bewaren. Na openen gekoeld bewaren.</div></div>';
+ $("modal").classList.add("on"); $("scrim").classList.add("on");
+ $("madd").onclick=goSignup;
+ $("mcard").querySelector("[data-close]").onclick=closeAll;
+}
+
+function renderCart(){
+ var ids=Object.keys(cart).filter(function(k){return cart[k]>0&&byId(k);});
+ var n=ids.reduce(function(s,k){return s+cart[k];},0);
+ var sub=ids.reduce(function(s,k){return s+cart[k]*byId(k).p;},0);
+ $("cartN").textContent=n; $("cartAmt").textContent=eur(sub);
+ $("cartBody").innerHTML=ids.length?ids.map(function(k){var p=byId(k);
+  return '<div class="line"><div><div class="ln">'+p.n+'</div><div class="size">'+p.b+' · '+p.s+'</div><div class="qty"><button data-dec="'+k+'">−</button><span>'+cart[k]+'</span><button data-inc="'+k+'">+</button></div></div>'+
+  '<div><div class="lp">'+eur(p.p*cart[k])+'</div><button class="rm" data-rm="'+k+'">Verwijderen</button></div></div>';}).join("")
+  :'<p style="color:var(--soft);padding:24px 0">Je winkelwagen is nog leeg.</p>';
+ $("cartBody").querySelectorAll("[data-inc]").forEach(function(b){b.onclick=function(){var p=byId(b.dataset.inc);cart[p.id]=Math.min(cart[p.id]+1,p.st);save();renderCart();};});
+ $("cartBody").querySelectorAll("[data-dec]").forEach(function(b){b.onclick=function(){cart[b.dataset.dec]--;if(cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];save();renderCart();};});
+ $("cartBody").querySelectorAll("[data-rm]").forEach(function(b){b.onclick=function(){delete cart[b.dataset.rm];save();renderCart();};});
+ var ship=mode==="pick"||sub>=FREE||!ids.length?0:SHIP;
+ $("sSub").textContent=eur(sub); $("sShip").textContent=mode==="pick"?"Gratis (ophalen)":ship===0&&ids.length?"Gratis":eur(ship); $("sTot").textContent=eur(sub+ship);
+ $("shipBar").style.width=Math.min(100,sub/FREE*100)+"%";
+ $("shipBar").parentNode.style.display=mode==="pick"?"none":"block";
+ $("shipNote").textContent=mode==="pick"?"Ophalen in Losser, we sturen je een bericht wanneer het klaarstaat.":sub>=FREE?"Je hebt gratis verzending.":"Nog "+eur(FREE-sub)+" tot gratis verzending.";
+ $("cAddr").style.display=mode==="pick"?"none":"block";
+ var wa=$("waBtn");
+ if(!ids.length){wa.setAttribute("aria-disabled","true");wa.removeAttribute("href");return;}
+ var msg="Hoi Kin Zaap Baan Thai! Ik wil graag bestellen:\n\n"+ids.map(function(k){var p=byId(k);return cart[k]+"x "+p.n+" ("+p.s+") – "+eur(p.p*cart[k]);}).join("\n")+
+  "\n\nSubtotaal: "+eur(sub)+"\n"+(mode==="pick"?"Ophalen in Losser":"Bezorgen, verzending: "+(ship?eur(ship):"gratis"))+"\nTotaal: "+eur(sub+ship)+
+  "\n\nNaam: "+($("cName").value||"-")+(mode==="pick"?"":"\nAdres: "+($("cAddr").value||"-"))+"\n\n(testbestelling via demo-webshop)";
+ wa.href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg); wa.removeAttribute("aria-disabled");
+}
+
+function closeAll(){["filterDrawer","modal","scrim"].forEach(function(i){$(i).classList.remove("on");});}
+$("openFilters").onclick=function(){$("filterDrawer").classList.add("on");$("scrim").classList.add("on");};
+$("scrim").onclick=closeAll;
+$("modal").onclick=function(e){if(e.target===$("modal"))closeAll();};
+document.querySelectorAll("[data-close]").forEach(function(b){b.onclick=closeAll;});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll();});
+$("q").oninput=function(){S.q=this.value;render();};
+$("sort").onchange=function(){S.sort=this.value;renderGrid();};
+
+// ---- nieuwsbrief-aanmelding ----
+// Zet hier het echte adres waar aanmeldingen heen gaan (of later een MailerLite/Brevo-formulier op de eigen site).
+var SIGNUP_EMAIL="kinzaapbaanthai@gmail.com";
+function goSignup(e){if(e)e.preventDefault();closeAll();if(S.cat!=="all"||S.q){S.q="";$("q").value="";S.cat="all";render();}
+ var el=$("signup");el.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(function(){$("semail").focus({preventScroll:true});},450);}
+document.querySelectorAll("[data-go-signup]").forEach(function(a){a.onclick=goSignup;});
+$("sform").onsubmit=function(e){
+ e.preventDefault(); var m=$("smsg"), v=$("semail").value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){m.className="msg err";m.textContent="Vul een geldig e-mailadres in.";return;}
+ if(!$("sok").checked){m.className="msg err";m.textContent="Vink het vakje aan zodat we je mogen mailen.";return;}
+ var body="Hallo Kin Zaap Baan Thai,\n\nIk wil graag een bericht ontvangen zodra de webshop opengaat.\n\nMijn e-mailadres: "+v+"\n\nIk geef toestemming om mij hierover te mailen.";
+ window.location.href="mailto:"+SIGNUP_EMAIL+"?subject="+encodeURIComponent("Aanmelding: bericht bij opening")+"&body="+encodeURIComponent(body);
+ m.className="msg ok";m.textContent="Bijna klaar! Je mailprogramma opent: druk op versturen en je staat op de lijst.";
+};
+render();
+})();
+</script>
+</body>
+</html>
