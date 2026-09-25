@@ -11,20 +11,10 @@
 :root{
   --bg:#FFFFFF; --panel:#FFFFFF; --ink:#1F2421; --soft:#5E655F; --line:#E7E9E6;
   --brand:#2F5D46; --brand-dark:#234636; --brand-tint:#E6EFE9;
-  --accent:#C8412B; --gold:#E3A63A; --ok:#2E8A4F; --tile:#F5F7F4; --th-red:#A51931; --th-blue:#2D2A4A;
+  --accent:#C8412B; --gold:#E3A63A; --ok:#2E8A4F; --tile:#F7F8F7; --th-red:#A51931; --th-blue:#2D2A4A;
   --radius:8px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#161917; --panel:#1F2320; --ink:#EDEFEA; --soft:#A7ADA6; --line:#343A35;
-    --brand-tint:#233129; --tile:#2A2E2A;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#161917; --panel:#1F2320; --ink:#EDEFEA; --soft:#A7ADA6; --line:#343A35;
-  --brand-tint:#233129; --tile:#2A2E2A;
-}
-:root{box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+:root{color-scheme:light; box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
 html{scroll-padding-top:env(safe-area-inset-top,0px);}
 *,*::before,*::after{box-sizing:inherit;}
 body{margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans',system-ui,-apple-system,Segoe UI,sans-serif; font-size:15px; -webkit-font-smoothing:antialiased;}
